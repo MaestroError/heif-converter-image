@@ -11,16 +11,15 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+        goos: ['linux', 'darwin', 'windows']
         include:
           - os: ubuntu-latest
             goos: linux
-            archs: ['amd64', 'arm64']
           - os: macos-latest
             goos: darwin
-            archs: ['amd64']  #, 'arm64' -- Uncomment this to enable cross-compiling for macOS on ARM64
           - os: windows-latest
             goos: windows
-            archs: ['amd64']
             
     steps:
     - uses: actions/checkout@v2
@@ -40,9 +39,7 @@ jobs:
           cmd.exe /c .\install-libheif-windows.bat
         fi
         mkdir -p bin
-        for arch in ${{ join(matrix.archs, ' ') }}; do
-          GOOS=${{ matrix.goos }} GOARCH=$arch go build -o bin/heif-converter-${{ matrix.goos }}-$arch
-        done
+        GOOS=${{ matrix.goos }} go build -o bin/heif-converter-${{ matrix.goos }}
 
     - name: Archive Production Artifacts
       uses: actions/upload-artifact@v2
