@@ -51,3 +51,11 @@ jobs:
         name: heif-converter-${{ runner.os }}
         path: |
           ./bin/*
+
+    # - name: Commit and push
+    #   run: |
+    #     git config --local user.email "action@github.com"
+    #     git config --local user.name "GitHub Action"
+    #     git add ./bin/*
+    #     git commit -m "Add binaries from build" -a
+    #     git push

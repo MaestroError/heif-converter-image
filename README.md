@@ -79,3 +79,5 @@ App ships with 3 binary file in the bin directory. Choose by your platform:
 - Fix windows building
 - Register in packagist
 - Update instructions in [php-heic-to-jpg](https://github.com/MaestroError/php-heic-to-jpg) docs
+- Refactor main.go and add shutdown function
+- Make the first release
