@@ -40,10 +40,10 @@ jobs:
       run: |
         cmd.exe /c .\install-libheif-windows.bat
         go test
-        GOOS=windows go build -o bin/heif-converter-windows.exe
+        go build -o bin/heif-converter-windows.exe
 
     - name: Archive Production Artifacts
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
         name: heif-converter-${{ runner.os }}
         path: |
