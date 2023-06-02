@@ -1,0 +1,44 @@
+name: Build and Install
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Set up Go
+      uses: actions/setup-go@v2
+      with:
+        go-version: 1.18
+
+    - name: Install Dependencies and Build
+      run: |
+        if [ "${{ runner.os }}" == "Linux" ]; then
+          bash ./install-libheif.sh
+          GOOS=linux go build -o heif-converter
+        elif [ "${{ runner.os }}" == "macOS" ]; then
+          bash ./install-libheif-macos.sh
+          GOOS=darwin go build -o heif-converter
+        elif [ "${{ runner.os }}" == "Windows" ]; then
+          cmd.exe /c .\install-libheif-windows.bat
+          GOOS=windows go build -o heif-converter.exe
+        fi
+
+    - name: Archive Production Artifacts
+      uses: actions/upload-artifact@v2
+      with:
+        name: heif-converter-${{ runner.os }}
+        path: |
+          ./heif-converter
+          ./heif-converter.exe
