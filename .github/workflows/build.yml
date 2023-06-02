@@ -9,11 +9,19 @@ on:
 jobs:
   build:
     runs-on: ${{ matrix.os }}
-
     strategy:
       matrix:
-        os: [ubuntu-latest, macos-latest, windows-latest]
-
+        include:
+          - os: ubuntu-latest
+            goos: linux
+            archs: ['amd64', 'arm64']
+          - os: macos-latest
+            goos: darwin
+            archs: ['amd64']  #, 'arm64' -- Uncomment this to enable cross-compiling for macOS on ARM64
+          - os: windows-latest
+            goos: windows
+            archs: ['amd64']
+            
     steps:
     - uses: actions/checkout@v2
 
@@ -24,21 +32,21 @@ jobs:
 
     - name: Install Dependencies and Build
       run: |
-        if [ "${{ runner.os }}" == "Linux" ]; then
+        if [[ "${{ runner.os }}" == "Linux" ]]; then
           bash ./install-libheif.sh
-          GOOS=linux go build -o heif-converter
-        elif [ "${{ runner.os }}" == "macOS" ]; then
+        elif [[ "${{ runner.os }}" == "macOS" ]]; then
           bash ./install-libheif-macos.sh
-          GOOS=darwin go build -o heif-converter
-        elif [ "${{ runner.os }}" == "Windows" ]; then
+        elif [[ "${{ runner.os }}" == "Windows" ]]; then
           cmd.exe /c .\install-libheif-windows.bat
-          GOOS=windows go build -o heif-converter.exe
         fi
+        mkdir -p bin
+        for arch in ${{ join(matrix.archs, ' ') }}; do
+          GOOS=${{ matrix.goos }} GOARCH=$arch go build -o bin/heif-converter-${{ matrix.goos }}-$arch
+        done
 
     - name: Archive Production Artifacts
       uses: actions/upload-artifact@v2
       with:
-        name: heif-converter-${{ runner.os }}
+        name: heif-converter-${{ matrix.os }}
         path: |
-          ./heif-converter
-          ./heif-converter.exe
+          ./bin/*

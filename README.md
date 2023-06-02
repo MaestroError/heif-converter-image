@@ -1,13 +1,13 @@
 # heif-converter-image
-heif-converter-image is a Docker image designed to offer a simple and straightforward way to convert HEIC (and AVIF) images to other common formats like JPEG and PNG, and vice versa. It leverages the go-libheif module, a GoLang wrapper for the libheif library.
+heif-converter is a versatile command-line application, along with a Docker image, that offers an easy and efficient way to convert HEIC (and AVIF) images to other common formats like JPEG and PNG, and vice versa. It leverages the go-libheif module, a GoLang wrapper for the libheif library. This tool can be used as a standalone CLI application across various platforms including macOS, Linux, and Windows, or used via a Docker container, making it a flexible solution for all your HEIC image conversion needs.
 
 ## Installing dependencies
-[libheif](https://github.com/strukturag/libheif) is the only dependency to use this app. For simplifing the installation process here are ready to use scripts:
+heif-converter relies on [libheif](https://github.com/strukturag/libheif), which must be installed on your system. To simplify the installation process, we've provided ready-to-use scripts for different operating systems::
 - install-libheif.sh
 - install-libheif-macos.sh
 - install-libheif-windows.bat
            
-*note: these scripts assume that the required tools (such as git and brew for macOS or git for Windows) are already installed on the system.*
+*note: these scripts assume that the required tools (such as **git** and **brew** for macOS or **git** for Windows) are already installed on the system.*
 
 ## Using from docker
 Pull [docker image](https://hub.docker.com/r/maestroerror/heif-converter):
