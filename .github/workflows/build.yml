@@ -2,9 +2,9 @@ name: Build and Install
 
 on:
   push:
-    branches: [ main ]
+    branches: [ maestro ]
   pull_request:
-    branches: [ main ]
+    branches: [ maestro ]
 
 jobs:
   build:
