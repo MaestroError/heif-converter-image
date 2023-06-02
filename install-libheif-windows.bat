@@ -13,5 +13,8 @@ REM Install libheif
 .\vcpkg integrate install
 .\vcpkg install libheif
 
+REM Define PKG_CONFIG_PATH
+set PKG_CONFIG_PATH=%cd%\src\vcpkg
+
 REM Go back to the initial directory
 cd ..

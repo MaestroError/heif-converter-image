@@ -10,7 +10,7 @@ heif-converter relies on [libheif](https://github.com/strukturag/libheif), which
 *note: these scripts assume that the required tools (such as **git** and **brew** for macOS or **git** for Windows) are already installed on the system.*
 
 ## Using from docker
-Pull [docker image](https://hub.docker.com/r/maestroerror/heif-converter):
+In case you find Pull [docker image](https://hub.docker.com/r/maestroerror/heif-converter):
 ```bash
 docker pull maestroerror/heif-converter:latest
 ```
@@ -28,8 +28,14 @@ Just point to the executable (`./heif-converter`), add the current image format 
 ```bash
 ./heif-converter [heic|avif|jpeg|png] path/to/input_file.heic /path/to/output_file.png
 ```
-*Note: It will detect output file format automatically based on the extension*
+*Note: It will detect output file format automatically based on the extension*         
+App ships with 3 binary file in the bin directory. Choose by your platform:
+- heif-converter-linux
+- heif-converter-macos
+- heif-converter-windows.exe
 
 ### Development
 - build command `go build -o bin/heif-converter`
 
+##### To Do
+- Fix windows building
