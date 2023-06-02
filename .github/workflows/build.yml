@@ -12,14 +12,6 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest, macos-latest, windows-latest]
-        goos: ['linux', 'darwin', 'windows']
-        include:
-          - os: ubuntu-latest
-            goos: linux
-          - os: macos-latest
-            goos: darwin
-          - os: windows-latest
-            goos: windows
             
     steps:
     - uses: actions/checkout@v2
@@ -31,19 +23,20 @@ jobs:
 
     - name: Install Dependencies and Build
       run: |
-        if [[ "${{ runner.os }}" == "Linux" ]]; then
+        if [ "${{ runner.os }}" == "Linux" ]; then
           bash ./install-libheif.sh
-        elif [[ "${{ runner.os }}" == "macOS" ]]; then
+          GOOS=linux go build -o bin/heif-converter-linux
+        elif [ "${{ runner.os }}" == "macOS" ]; then
           bash ./install-libheif-macos.sh
-        elif [[ "${{ runner.os }}" == "Windows" ]]; then
+          GOOS=darwin go build -o bin/heif-converter-macos
+        elif [ "${{ runner.os }}" == "Windows" ]; then
           cmd.exe /c .\install-libheif-windows.bat
+          GOOS=windows go build -o bin/heif-converter-windows.exe
         fi
-        mkdir -p bin
-        GOOS=${{ matrix.goos }} go build -o bin/heif-converter-${{ matrix.goos }}
 
     - name: Archive Production Artifacts
       uses: actions/upload-artifact@v2
       with:
-        name: heif-converter-${{ matrix.os }}
+        name: heif-converter-${{ runner.os }}
         path: |
           ./bin/*
