@@ -24,7 +24,7 @@ jobs:
     
     - name: Set up Vcpkg
       if: runner.os == 'Windows'
-      uses: lukka/run-vcpkg@v8
+      uses: lukka/run-vcpkg@v11
       with:
         vcpkgArguments: 'libheif'
         vcpkgDirectory: '${{ runner.workspace }}/vcpkg/'
