@@ -10,6 +10,7 @@ import (
 func main() {
 	if len(os.Args) < 4 {
 		fmt.Printf("Usage: %s [heic|avif|jpeg|png] input_file output_file\n", os.Args[0])
+		Shutdown()
 	}
 
 	inputFormat := os.Args[1]
@@ -21,7 +22,7 @@ func main() {
 		// Determine the output format based on the output file extension
 		switch outputFile[len(outputFile)-3:] {
 		case "jpg", "peg":
-			err := libheif.HeifToJpeg(inputFile, outputFile, 80)
+			err := libheif.HeifToJpeg(inputFile, outputFile, 100)
 			if err != nil {
 				fmt.Println(err)
 			}
@@ -41,4 +42,9 @@ func main() {
 	default:
 		fmt.Println("Unsupported input format")
 	}
+}
+
+func Shutdown() {
+	fmt.Println("Created by MaestroError")
+	os.Exit(1)
 }

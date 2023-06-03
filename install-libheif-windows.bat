@@ -14,7 +14,10 @@ REM Install libheif
 .\vcpkg install libheif
 
 REM Define PKG_CONFIG_PATH
-set PKG_CONFIG_PATH=%cd%\src\vcpkg
+setx PKG_CONFIG_PATH "%cd%\installed\x64-windows\lib\pkgconfig;%cd%\installed\x86-windows\lib\pkgconfig"
+
+REM Add the bin directory to the PATH
+setx PATH "%PATH%;%cd%\installed\x64-windows\bin;%cd%\installed\x86-windows\bin"
 
 REM Go back to the initial directory
 cd ..
