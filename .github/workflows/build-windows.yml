@@ -1,4 +1,4 @@
-name: Build and Install for Windows
+name: Build and Install on Windows
 
 on:
   push:
@@ -9,28 +9,33 @@ on:
 jobs:
   build:
     runs-on: windows-latest
-            
+
     steps:
     - uses: actions/checkout@v3
       with:
         submodules: true
         fetch-depth: 0
 
+    - name: Setup vcpkg
+      uses: lukka/run-vcpkg@main
+      id: runvcpkg
+      with:
+        #vcpkgDirectory: '${{ github.workspace }}/vcpkg'
+        vcpkgJsonGlob: 'vcpkg.json'
+
     - name: Set up Go
       uses: actions/setup-go@v3
       with:
         go-version: 1.18
 
-    - name: Setup vcpkg
-      uses: lukka/run-vcpkg@main
-      with:
-        vcpkgDirectory: '${{ github.workspace }}/vcpkg'
-        vcpkgJsonGlob: 'vcpkg.json'
+    - name: Set PKG_CONFIG_PATH
+      run: echo "PKG_CONFIG_PATH=${{ steps.runvcpkg.outputs.RUNVCPKG_VCPKG_ROOT_OUT }}/installed/x64-windows/lib/pkgconfig" | Out-File -Append -FilePath $env:GITHUB_ENV -Encoding utf8
 
     - name: Build
       run: |
+        go env -w GOOS=windows
         go test
-        GOOS=windows go build -o bin/heif-converter-windows.exe
+        go build -o bin/heif-converter-windows.exe
 
     - name: Archive Production Artifacts
       uses: actions/upload-artifact@v3
