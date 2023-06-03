@@ -4,8 +4,7 @@
     "version": "1.0",
     "dependencies": [
       {
-        "name": "libheif",
-        "version>=": "1.12.0"
+        "name": "libheif"
       }
     ]
   }
