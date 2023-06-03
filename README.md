@@ -75,7 +75,7 @@ App ships with 3 binary file in the bin directory. Choose by your platform:
 - heif-converter-macos
 - heif-converter-windows.exe
 
-### Contributions
+## Contributions
 
 We warmly welcome all contributions to the heif-converter-image project! This project is completely open source and relies on contributions from the community to expand its reach, improve its functionality, and fix any existing issues.
 
