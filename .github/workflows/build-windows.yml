@@ -21,6 +21,7 @@ jobs:
       id: runvcpkg
       with:
         vcpkgJsonGlob: 'vcpkg.json'
+        runVcpkgInstall: true  # Change this to true
 
     - name: Set up Go
       uses: actions/setup-go@v3
@@ -34,10 +35,10 @@ jobs:
 
     - name: Debug list directory contents
       run: |
-        echo "Listing x64-windows/lib/pkgconfig directory:"
-        dir "${{ steps.runvcpkg.outputs.RUNVCPKG_VCPKG_ROOT_OUT }}/installed/x64-windows/lib/pkgconfig"
         echo "Listing x86-windows/lib/pkgconfig directory:"
-        dir "${{ steps.runvcpkg.outputs.RUNVCPKG_VCPKG_ROOT_OUT }}/installed/x86-windows/lib/pkgconfig"
+        dir "${{ steps.runvcpkg.outputs.RUNVCPKG_VCPKG_ROOT_OUT }}\installed\x86-windows\lib\pkgconfig"
+        echo "Listing x64-windows/lib/pkgconfig directory:"
+        dir "${{ steps.runvcpkg.outputs.RUNVCPKG_VCPKG_ROOT_OUT }}\installed\x64-windows\lib\pkgconfig"
 
     - name: Build
       run: |
