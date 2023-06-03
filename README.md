@@ -61,7 +61,7 @@ For Windows, you need to use the command prompt to run install-libheif-windows.b
 ```
 After running the appropriate script, you should be able to use the heif-converter command as explained in next chapter. To ensure your installation is ready to use run `./vendor/bin/heif-converter-linux` command without arguments, you should get output like this:
 ```bash
-Usage: ./vendor/bin/heif-converter-linux [heic|avif|jpeg|png] input_file output_file\n
+Usage: ./vendor/bin/heif-converter-linux [heic|avif|jpeg|png] input_file output_file
 ``` 
 
 ## Usage
@@ -75,5 +75,22 @@ App ships with 3 binary file in the bin directory. Choose by your platform:
 - heif-converter-macos
 - heif-converter-windows.exe
 
+### Contributions
+
+We warmly welcome all contributions to the heif-converter-image project! This project is completely open source and relies on contributions from the community to expand its reach, improve its functionality, and fix any existing issues.
+
+#### How to Contribute
+
+If you are interested in contributing to the heif-converter-image project, you are free to submit Pull Requests and Issues. Your contributions can range from bug fixes, feature enhancements, adding documentation, to writing test cases. Before submitting a Pull Request, please ensure that you have tested your changes thoroughly and that all tests pass.
+        
+In your Pull Requests, be as detailed as possible in your commit messages and comments to help the maintainers understand your changes. For Issues, provide as much detail as you can about the problem, including steps to reproduce it, your operating system and version, etc.
+Building for Different Platforms
+        
+Currently, heif-converter-image is shipped with executables for Windows, Linux, and macOS Intel-based architectures. However, we understand the growing demand and necessity for supporting a broader range of platforms.
+        
+We're particularly interested in expanding support for Linux ARM64 and macOS M1 architectures. If you have experience in building for these platforms or have these systems for testing, your contributions would be greatly appreciated.
+        
+Remember, open source projects thrive on the collaboration and contributions from developers like you. Together, we can make heif-converter-image even better. Let's build something amazing together!
+        
 ### Development
 - build test bin `go build -o bin/heif-converter`
