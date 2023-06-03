@@ -40,10 +40,10 @@ After installing the heif-converter, you can find the executable in the vendor/b
 For example, to convert an image on a Linux system, you can run:
 
 ```bash
-vendor/bin/heif-converter-linux input.heic output.png
+./vendor/bin/heif-converter-linux heic input.heic output.png
 ```
 
-##### Running Installation Script
+#### Running Installation Script
 
 Before using the heif-converter, you may need to run the installation script for your platform. These scripts install the necessary dependencies and build the heif-converter binary.
             
@@ -73,4 +73,4 @@ App ships with 3 binary file in the bin directory. Choose by your platform:
 - heif-converter-windows.exe
 
 ### Development
-- build command `go build -o bin/heif-converter`
+- build test bin `go build -o bin/heif-converter`
