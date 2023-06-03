@@ -7,7 +7,7 @@ heif-converter relies on [libheif](https://github.com/strukturag/libheif), which
 - install-libheif-macos.sh
 - install-libheif-windows.bat
            
-*note: these scripts assume that the required tools (such as **git** and **brew** for macOS or **git** for Windows) are already installed on the system.*
+*note: these scripts assume that the required tools (such as **git** and **brew** for macOS or **git** and **Visual Studio with C++ Desktop development** for Windows) are already installed on the system.*
 
 ## Using from docker
 In case you find Pull [docker image](https://hub.docker.com/r/maestroerror/heif-converter):

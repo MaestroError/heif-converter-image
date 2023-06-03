@@ -41,6 +41,15 @@ jobs:
     #     dir "${{ steps.runvcpkg.outputs.RUNVCPKG_VCPKG_ROOT_OUT }}\installed\x64-windows\lib\pkgconfig"
     # Cannot find path 'D:\a\heif-converter-image\heif-converter-image\vcpkg\installed\x86-windows\lib\pkgconfig' because it does not exist.
 
+    - name: Debug list directory contents
+      run: |
+        echo "Listing vcpkg directory:"
+        dir "${{ steps.runvcpkg.outputs.RUNVCPKG_VCPKG_ROOT_OUT }}"
+        echo "Listing installed directory:"
+        dir "${{ steps.runvcpkg.outputs.RUNVCPKG_VCPKG_ROOT_OUT }}\installed"
+        echo "Listing x64-windows/lib directory:"
+        dir "${{ steps.runvcpkg.outputs.RUNVCPKG_VCPKG_ROOT_OUT }}\installed\x64-windows\lib"
+
     - name: Build
       run: |
         go env -w GOOS=windows
