@@ -20,7 +20,6 @@ jobs:
       uses: lukka/run-vcpkg@main
       id: runvcpkg
       with:
-        #vcpkgDirectory: '${{ github.workspace }}/vcpkg'
         vcpkgJsonGlob: 'vcpkg.json'
 
     - name: Set up Go
@@ -28,8 +27,10 @@ jobs:
       with:
         go-version: 1.18
 
-    - name: Set PKG_CONFIG_PATH
-      run: echo "PKG_CONFIG_PATH=${{ steps.runvcpkg.outputs.RUNVCPKG_VCPKG_ROOT_OUT }}/installed/x64-windows/lib/pkgconfig" | Out-File -Append -FilePath $env:GITHUB_ENV -Encoding utf8
+    - name: Set PKG_CONFIG_PATH and PATH
+      run: |
+        echo "PKG_CONFIG_PATH=${{ steps.runvcpkg.outputs.RUNVCPKG_VCPKG_ROOT_OUT }}/installed/x64-windows/lib/pkgconfig;${{ steps.runvcpkg.outputs.RUNVCPKG_VCPKG_ROOT_OUT }}/installed/x86-windows/lib/pkgconfig" | Out-File -Append -FilePath $env:GITHUB_ENV -Encoding utf8
+        echo "PATH=${{ steps.runvcpkg.outputs.RUNVCPKG_VCPKG_ROOT_OUT }}/installed/x64-windows/bin;${{ steps.runvcpkg.outputs.RUNVCPKG_VCPKG_ROOT_OUT }}/installed/x86-windows/bin;${env:PATH}" | Out-File -Append -FilePath $env:GITHUB_ENV -Encoding utf8
 
     - name: Build
       run: |
@@ -43,3 +44,7 @@ jobs:
         name: heif-converter-windows
         path: |
           ./bin/*
+
+
+
+        #vcpkgDirectory: '${{ github.workspace }}/vcpkg'
