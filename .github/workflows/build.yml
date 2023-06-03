@@ -1,17 +1,9 @@
-name: Build and Install
-
-on:
-  push:
-    branches: [ maestro ]
-  pull_request:
-    branches: [ maestro ]
-
 jobs:
   build:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ubuntu-latest, macos-latest, windows-latest] # , windows-latest deprecated for a while
+        os: [ubuntu-latest, macos-latest, windows-latest]
       fail-fast: false
             
     steps:
@@ -21,6 +13,14 @@ jobs:
       uses: actions/setup-go@v3
       with:
         go-version: 1.18
+    
+    - name: Set up Vcpkg
+      if: runner.os == 'Windows'
+      uses: lukka/run-vcpkg@v8
+      with:
+        vcpkgArguments: 'libheif'
+        vcpkgDirectory: '${{ runner.workspace }}/vcpkg/'
+        vcpkgTriplet: 'x64-windows'
 
     - name: Install Dependencies and Build on Linux
       if: runner.os == 'Linux'
@@ -36,12 +36,11 @@ jobs:
         go test
         GOOS=darwin go build -o bin/heif-converter-macos
 
-    - name: Install Dependencies and Build on Windows
+    - name: Build on Windows
       env:
         PKG_CONFIG_PATH: C:/src/vcpkg
       if: runner.os == 'Windows'
       run: |
-        cmd.exe /c .\install-libheif-windows.bat
         go test
         go build -o bin/heif-converter-windows.exe
 
@@ -51,11 +50,3 @@ jobs:
         name: heif-converter-${{ runner.os }}
         path: |
           ./bin/*
-
-    # - name: Commit and push
-    #   run: |
-    #     git config --local user.email "action@github.com"
-    #     git config --local user.name "GitHub Action"
-    #     git add ./bin/*
-    #     git commit -m "Add binaries from build" -a
-    #     git push
