@@ -22,4 +22,4 @@ go.work
 
 libheif/*
 libheif
-vcpkg
+# vcpkg
