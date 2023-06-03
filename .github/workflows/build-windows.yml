@@ -33,12 +33,13 @@ jobs:
         echo "PKG_CONFIG_PATH=${{ steps.runvcpkg.outputs.RUNVCPKG_VCPKG_ROOT_OUT }}/installed/x64-windows/lib/pkgconfig;${{ steps.runvcpkg.outputs.RUNVCPKG_VCPKG_ROOT_OUT }}/installed/x86-windows/lib/pkgconfig" | Out-File -Append -FilePath $env:GITHUB_ENV -Encoding utf8
         echo "PATH=${{ steps.runvcpkg.outputs.RUNVCPKG_VCPKG_ROOT_OUT }}/installed/x64-windows/bin;${{ steps.runvcpkg.outputs.RUNVCPKG_VCPKG_ROOT_OUT }}/installed/x86-windows/bin;${env:PATH}" | Out-File -Append -FilePath $env:GITHUB_ENV -Encoding utf8
 
-    - name: Debug list directory contents
-      run: |
-        echo "Listing x86-windows/lib/pkgconfig directory:"
-        dir "${{ steps.runvcpkg.outputs.RUNVCPKG_VCPKG_ROOT_OUT }}\installed\x86-windows\lib\pkgconfig"
-        echo "Listing x64-windows/lib/pkgconfig directory:"
-        dir "${{ steps.runvcpkg.outputs.RUNVCPKG_VCPKG_ROOT_OUT }}\installed\x64-windows\lib\pkgconfig"
+    # - name: Debug list directory contents
+    #   run: |
+    #     echo "Listing x86-windows/lib/pkgconfig directory:"
+    #     dir "${{ steps.runvcpkg.outputs.RUNVCPKG_VCPKG_ROOT_OUT }}\installed\x86-windows\lib\pkgconfig"
+    #     echo "Listing x64-windows/lib/pkgconfig directory:"
+    #     dir "${{ steps.runvcpkg.outputs.RUNVCPKG_VCPKG_ROOT_OUT }}\installed\x64-windows\lib\pkgconfig"
+    # Cannot find path 'D:\a\heif-converter-image\heif-converter-image\vcpkg\installed\x86-windows\lib\pkgconfig' because it does not exist.
 
     - name: Build
       run: |
