@@ -44,7 +44,7 @@ jobs:
     - name: Debug list directory contents
       run: |
         echo "Listing D:\a\heif-converter-image\b\vcpkg_installed directory:"
-        dir "${{ env.VCPKG_INSTALLED_DIR }}"
+        dir "D:/a/heif-converter-image/b/vcpkg_installed"
 
     - name: Build
       run: |
