@@ -1,0 +1,40 @@
+name: Build and Install for Windows
+
+on:
+  push:
+    branches: [ maestro ]
+  pull_request:
+    branches: [ maestro ]
+
+jobs:
+  build:
+    runs-on: windows-latest
+            
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        submodules: true
+        fetch-depth: 0
+
+    - name: Set up Go
+      uses: actions/setup-go@v3
+      with:
+        go-version: 1.18
+
+    - name: Setup vcpkg
+      uses: lukka/run-vcpkg@main
+      with:
+        vcpkgDirectory: '${{ github.workspace }}/vcpkg'
+        vcpkgJsonGlob: 'vcpkg.json'
+
+    - name: Build
+      run: |
+        go test
+        GOOS=windows go build -o bin/heif-converter-windows.exe
+
+    - name: Archive Production Artifacts
+      uses: actions/upload-artifact@v3
+      with:
+        name: heif-converter-windows
+        path: |
+          ./bin/*
