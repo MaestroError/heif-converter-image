@@ -9,6 +9,7 @@
         }
     ],
     "minimum-stability": "dev",
+    "prefer-stable": true,
     "bin": [
         "bin/heif-converter-linux",
         "bin/heif-converter-windows",
