@@ -109,6 +109,10 @@ We're particularly interested in expanding support for Linux ARM64 and macOS M1 
 
 Remember, open source projects thrive on the collaboration and contributions from developers like you. Together, we can make heif-converter-image even better. Let's build something amazing together!
 
+### Development
+
+- build test bin `go build -o bin/heif-converter`
+
 ## Support
 
 Support Our Work? 🌟 You can help us keep the code flowing by making a small donation. Every bit of support goes a long way in maintaining and improving our open-source contributions. Click the button below to contribute. Thank you for your generosity!
@@ -118,9 +122,3 @@ Support Our Work? 🌟 You can help us keep the code flowing by making a small d
 Or use QR code:
 
 [<img src="https://github.com/MaestroError/resources/blob/maestro/buymeamilk/qr-code.png" width="135px">](https://www.buymeacoffee.com/maestroerror)
-
----
-
-### Development
-
-- build test bin `go build -o bin/heif-converter`
